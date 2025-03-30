@@ -1,13 +1,29 @@
+def input_error(func):
+    def inner(*args, **kwargs):
+        try:
+            return func(*args, **kwargs)
+        except ValueError:
+            return "Type name and phone number."
+        except IndexError:
+            return "Type name."
+        except KeyError:
+            return "Contact not found."
+        except Exception as e:
+            return f"An error occurred: {e}"
+    return inner
+
 def parse_input(user_input):
     cmd, *args = user_input.split()
     cmd = cmd.strip().lower()
     return cmd, *args 
 
+@input_error
 def add_contact(args, contacts):
     name, phone = args
     contacts[name] = phone
     return "Contact added."
 
+@input_error
 def change_contact(args, contacts):
     try:
         name, phone = args
@@ -17,6 +33,7 @@ def change_contact(args, contacts):
     except ValueError:
         return 'Contact not found'
 
+@input_error
 def all_contacts(contacts):
     if len(contacts):
         return_str = ''
@@ -25,6 +42,7 @@ def all_contacts(contacts):
         return return_str[:-2] 
     return 'Contacts not found'
 
+@input_error
 def phone_contact(args, contacts):
     try:
         name = args[0]

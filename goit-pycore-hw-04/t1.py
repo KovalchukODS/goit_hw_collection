@@ -1,11 +1,11 @@
 
-with open('goit-pycore-hw-04/t1_data.txt', 'w') as t1_data:
+with open('goit-pycore-hw-04/t1_data.txt', 'w+') as t1_data:
     t1_data.write("""Alex Korp,3000
                   Nikita Borisenko,2000
                   Sitarama Raju,1000""")
 
 
-def total_salary(path):
+def total_salary(path:str) -> int:
     try:
       with open(path, 'r+', encoding='utf-8') as file:
         salaries = []
