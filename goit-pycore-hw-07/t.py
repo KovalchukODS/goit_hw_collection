@@ -57,7 +57,7 @@ class Record:
         return next((p.value for p in self.phones if p.value == phone), None)
     
     def add_birthday(self, birthdate):
-            self.add_birthday = birthdate
+            self.add_birthday = Birthday(birthdate)
 
 class AddressBook(UserDict):
     def add_record(self, record):
